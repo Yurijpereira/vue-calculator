@@ -43,17 +43,19 @@ export default {
     name: 'calculator',
     data() {
         return {
-            displayValue: '',
+            displayValue: ''
         }
     },
     methods: {
         changeDisplay(btnValue) {
+            let lastValue = this.displayValue[this.displayValue.length - 1];
+
             if (this.checkDuplicateSignal(btnValue)) return;
 
             if (this.checkDuplicatePoint(btnValue)) return;
 
-            if((btnValue === '-' || btnValue === '.' || btnValue === '*' || btnValue === '/' || btnValue === '+') && this.displayValue[this.displayValue.length - 1] === '-') return;
-            if(btnValue === '-' && this.displayValue[this.displayValue.length - 1] === '+') return;
+            if((btnValue === '-' || btnValue === '.' || btnValue === '*' || btnValue === '/' || btnValue === '+') && lastValue === '-') return;
+            if(btnValue === '-' && lastValue === '+') return;
 
             if (btnValue === "C" || this.displayValue === '/' || this.displayValue === '*') {
                 this.displayValue = '';
@@ -66,6 +68,9 @@ export default {
             }
         },
         compute() {
+            let lastValue = this.displayValue[this.displayValue.length - 1];
+            if (lastValue === '+' || lastValue === '-' || lastValue === '*' || lastValue === '/') return;
+
             let equal = eval(this.displayValue);
 
             if (equal === undefined) {
@@ -78,8 +83,6 @@ export default {
             }
         },
         checkDuplicatePoint(btnValue) {
-            console.log(btnValue);
-            console.log(this.displayValue);
             let separateDisplay = this.displayValue.toString().split(/[\+\-\*\/]/);
             let lastSeparateDisplay = separateDisplay[separateDisplay.length - 1]
             if (lastSeparateDisplay.includes('.') && btnValue === '.') {
