@@ -52,7 +52,7 @@ export default {
 
             if (this.checkDuplicatePoint(btnValue)) return;
 
-            if((btnValue === '-' || btnValue === '*' || btnValue === '/' || btnValue === '+') && this.displayValue[this.displayValue.length - 1] === '-') return;
+            if((btnValue === '-' || btnValue === '.' || btnValue === '*' || btnValue === '/' || btnValue === '+') && this.displayValue[this.displayValue.length - 1] === '-') return;
 
             if (btnValue === "C" || this.displayValue === '/' || this.displayValue === '*' || this.displayValue === '+') {
                 this.displayValue = '';
